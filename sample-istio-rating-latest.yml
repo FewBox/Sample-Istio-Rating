@@ -1,0 +1,19 @@
+# Deployment #
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: sample-istio-rating
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: sample-istio-rating
+        version: latest
+    spec:
+      containers:
+      - name: sample-istio-rating
+        image: fewbox/sample-istio-rating:latest
+        ports:
+        - containerPort: 80
+        imagePullPolicy: Always

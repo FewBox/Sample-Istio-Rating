@@ -1,0 +1,13 @@
+# Service #
+apiVersion: v1
+kind: Service
+metadata:
+  name: sample-istio-rating
+  labels:
+    app: sample-istio-rating
+spec:
+  ports:
+  - port: 80
+    name: http
+  selector:
+    app: sample-istio-rating
