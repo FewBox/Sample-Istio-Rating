@@ -11,3 +11,32 @@ spec:
     name: http
   selector:
     app: sample-istio-rating
+---
+# DestinationRule #
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: sample-istio-rating
+spec:
+  host: sample-istio-rating
+  trafficPolicy:
+    tls:
+      mode: ISTIO_MUTUAL
+  subsets:
+  - name: latest
+    labels:
+      version: latest
+---
+# VirtualService #
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: sample-istio-rating
+spec:
+  hosts:
+  - sample-istio-rating
+  http:
+  - route:
+    - destination:
+        host: sample-istio-rating
+        subset: latest
